@@ -1,0 +1,208 @@
+import ru.ifmo.se.pokemon.*;
+
+public class lab2 {
+
+    public static void main(String[] args) {
+        Battle b = new Battle();
+        Pokemon p1 = new Jirachi("", 50);
+        Pokemon p2 = new Shelmet("", 50);
+        Pokemon p3 = new Accelgor("", 50);
+        Pokemon p4 = new Sewaddle("", 50);
+        Pokemon p5 = new Swadloon("", 50);
+        Pokemon p6 = new Leavanny("", 50);
+        b.addAlly(p1);
+        b.addAlly(p2);
+        b.addAlly(p3);
+        b.addFoe(p4);
+        b.addFoe(p5);
+        b.addFoe(p6);
+        b.go();
+    }
+}
+
+class Jirachi extends Pokemon {
+    public Jirachi(String s, int i) {
+        super(s, i);
+        setStats(100, 100, 100, 100, 100, 100);
+        setType(Type.STEEL, Type.PSYCHIC);
+        setMove(new MetalClaw(), new EggBomb(), new MilkDrink(), new Psychic());
+    }
+}
+
+class Shelmet extends Pokemon {
+    public Shelmet(String s, int i) {
+        super(s, i);
+        setStats(50, 40, 85, 40, 65, 25);
+        setType(Type.BUG);
+        setMove(new MilkDrink(), new HealingWish(), new MudSlap());
+    }
+}
+
+class Accelgor extends Shelmet {
+    public Accelgor(String s, int i) {
+        super(s, i);
+        setStats(80, 70, 40, 100, 60, 145);
+        setType(Type.BUG);
+        addMove(new Agility());
+    }
+}
+
+class Sewaddle extends Pokemon {
+    public Sewaddle(String s, int i) {
+        super(s, i);
+        setStats(50, 30, 55, 65, 55, 20);
+        setType(Type.BUG, Type.GRASS);
+        setMove(new HealingWish(), new DrillPeck());
+    }
+}
+
+class Swadloon extends Sewaddle {
+    public Swadloon(String s, int i) {
+        super(s, i);
+        setStats(55, 63, 90, 50, 80, 42);
+        setType(Type.BUG, Type.GRASS);
+        addMove(new ArmThrust());
+    }
+}
+
+class Leavanny extends Swadloon {
+    public Leavanny(String s, int i) {
+        super(s, i);
+        setStats(60, 55, 90, 145, 90, 80);
+        setType(Type.BUG, Type.GRASS);
+        addMove(new RazorLeaf());
+    }
+}
+
+class MetalClaw extends PhysicalMove {
+    public MetalClaw() {
+        super(Type.STEEL, 50, 95);
+    }
+
+    @Override
+    protected String describe() {
+        return "использует Metal Claw";
+    }
+    @Override
+    protected void applySelfEffects(Pokemon p) {
+        Effect e = new Effect().chance(0.1).turns(-1).stat(Stat.ATTACK, +1);
+        p.addEffect(e);
+    }
+}
+
+class EggBomb extends PhysicalMove {
+    public EggBomb() {
+        super(Type.NORMAL, 100, 75);
+    }
+
+    @Override
+    protected String describe() {
+        return "использует Egg Bomb";
+    }
+}
+
+class MilkDrink extends StatusMove {
+    public MilkDrink() {
+        super(Type.NORMAL, 0, 100);
+    }
+
+    @Override
+    protected String describe() {
+        return "использует Milk Drink";
+    }
+}
+
+class Psychic extends SpecialMove {
+    public Psychic() {
+        super(Type.PSYCHIC, 90, 100);
+    }
+
+    @Override
+    protected String describe() {
+        return "использует Psychic";
+    }
+
+    @Override
+    protected void applyOppEffects(Pokemon p) {
+        Effect e = new Effect().chance(0.1).turns(-1).stat(Stat.SPECIAL_DEFENSE, -1);
+        p.addEffect(e);
+    }
+}
+
+class HealingWish extends StatusMove {
+    public HealingWish() {
+        super(Type.PSYCHIC, 0, 100);
+    }
+
+    @Override
+    protected String describe() {
+        return "использует Healing Wish";
+    }
+}
+
+class MudSlap extends SpecialMove {
+    public MudSlap() {
+        super(Type.GROUND, 20, 100);
+    }
+
+    @Override
+    protected String describe() {
+        return "использует Mud-Slap";
+    }
+
+    @Override
+    protected void applyOppEffects(Pokemon p) {
+        Effect e = new Effect().chance(1).turns(-1).stat(Stat.ACCURACY, -1);
+        p.addEffect(e);
+    }
+}
+
+class Agility extends StatusMove {
+    public Agility() {
+        super(Type.PSYCHIC, 0, 100);
+    }
+
+    @Override
+    protected String describe() {
+        return "использует Agility";
+    }
+
+    @Override
+    protected void applySelfEffects(Pokemon p) {
+        Effect e = new Effect().chance(1).turns(-1).stat(Stat.SPEED, +2);
+        p.addEffect(e);
+    }
+}
+
+class DrillPeck extends PhysicalMove {
+    public DrillPeck() {
+        super(Type.FLYING, 80, 100);
+    }
+
+    @Override
+    protected String describe() {
+        return "использует Drill Peck";
+    }
+}
+
+class ArmThrust extends PhysicalMove {
+    public ArmThrust() {
+        super(Type.FIGHTING, 15, 100, 1, ((int)(Math.random()*4+2)));
+    }
+
+    @Override
+    protected String describe() {
+        return "использует Arm Thrust";
+    }
+}
+
+class RazorLeaf extends PhysicalMove {
+    public RazorLeaf() {
+        super(Type.GRASS, 55, 95);
+    }
+
+    @Override
+    protected String describe() {
+        return "использует Razor Leaf";
+    }
+}
