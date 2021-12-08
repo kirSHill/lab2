@@ -4,12 +4,12 @@ public class lab2 {
 
     public static void main(String[] args) {
         Battle b = new Battle();
-        Pokemon p1 = new Jirachi("", 50);
-        Pokemon p2 = new Shelmet("", 50);
-        Pokemon p3 = new Accelgor("", 50);
-        Pokemon p4 = new Sewaddle("", 50);
-        Pokemon p5 = new Swadloon("", 50);
-        Pokemon p6 = new Leavanny("", 50);
+        Pokemon p1 = new Jirachi("", 42);
+        Pokemon p2 = new Shelmet("", 1);
+        Pokemon p3 = new Accelgor("", 24);
+        Pokemon p4 = new Sewaddle("", 1);
+        Pokemon p5 = new Swadloon("", 1);
+        Pokemon p6 = new Leavanny("", 15);
         b.addAlly(p1);
         b.addAlly(p2);
         b.addAlly(p3);
